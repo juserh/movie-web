@@ -1,14 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FaCode } from "react-icons/fa";
 import { API_URL, API_KEY } from "../../Config";
 
 function LandingPage() {
+  const [Movies, setMovies] = useState([]);
   useEffect(() => {
     const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
 
     fetch(endpoint)
       .then((response) => response.json())
-      .then((response) => console.log(response));
+      .then((response) => {
+        setMovies([response.results]);
+      });
   }, []);
   return (
     <div style={{ width: "100%", margin: "0" }}>
