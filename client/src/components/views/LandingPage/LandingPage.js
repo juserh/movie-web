@@ -22,7 +22,10 @@ function LandingPage() {
       .then((response) => {
         console.log(response);
         setMovies([...Movies, ...response.results]);
-        setMainMovieImage(response.results[0]);
+        if (CurrentPage === 0) {
+          setMainMovieImage(response.results[0]);
+        }
+
         setCurrentPage(response.page);
       });
   };
