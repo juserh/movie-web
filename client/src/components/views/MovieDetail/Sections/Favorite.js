@@ -21,7 +21,16 @@ function Favorite(props) {
         alert("숫자 정보를 가져오는데 실패했습니다.");
       }
     });
+
+    Axios.post("/api/favorite/favorited", variables).then((response) => {
+      if (response.data.success) {
+        console.log(response.data);
+      } else {
+        alert("정보를 가져오는데 실패했습니다.");
+      }
+    });
   });
+
   return (
     <div>
       <button>Favorite</button>
