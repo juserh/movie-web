@@ -1,4 +1,5 @@
 const express = require("express");
+const req = require("express/lib/request");
 const router = express.Router();
 const { Favorite } = require("../models/Favorite");
 
@@ -42,6 +43,13 @@ router.post("/addToFavorite", (req, res) => {
   favorite.save((err, doc) => {
     if (err) return res.status(400).send(err);
     return res.status(200).json({ success: true });
+  });
+});
+
+router.post("/getFavoriteMovie", (req, res) => {
+  Favorite.find({ userFrom: req.body.userFrom }).exec((err, favorites) => {
+    if (err) return res.status(400).send(err);
+    return res.status(200).json({ success: true, favorites });
   });
 });
 
